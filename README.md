@@ -163,8 +163,8 @@ Beta was calculated using SPY as the market benchmark:
 
 $$
 \beta_i =
-\frac{\operatorname{Cov}(R_i,R_m)}
-{\operatorname{Var}(R_m)}
+\frac{\mathrm{Cov}(R_i,R_m)}
+{\mathrm{Var}(R_m)}
 $$
 
 Beta measures an asset's sensitivity to movements in the broader market.
