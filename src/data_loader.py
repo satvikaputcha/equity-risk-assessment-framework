@@ -1,5 +1,7 @@
+
 import yfinance as yf
 import pandas as pd
+
 
 def download_market_data(tickers, start_date, end_date):
     """
@@ -17,8 +19,19 @@ def download_market_data(tickers, start_date, end_date):
     Returns
     -------
     pandas.DataFrame
-        Historical market data.
+        Historical market data with auto-adjusted prices.
+
+    Raises
+    ------
+    ValueError
+        If the inputs are invalid or no data is returned.
     """
+    if not tickers:
+        raise ValueError("At least one ticker must be provided.")
+
+    if start_date >= end_date:
+        raise ValueError("start_date must be earlier than end_date.")
+
     data = yf.download(
         tickers=tickers,
         start=start_date,
@@ -27,5 +40,11 @@ def download_market_data(tickers, start_date, end_date):
         progress=False,
         group_by="ticker"
     )
+
+    if data.empty:
+        raise ValueError(
+            "No market data was returned. "
+            "Check the ticker symbols, date range, and data availability."
+        )
 
     return data
